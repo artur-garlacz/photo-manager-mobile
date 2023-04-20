@@ -11,7 +11,7 @@ import {
 import { useTheme } from 'react-native-paper';
 import { PostDetailsScreen } from 'src/screens/posts/PostDetailsScreen';
 import { StackList } from 'src/navigation';
-import { LogInScreen } from 'src/screens/auth/LoginScreen';
+import { LoginScreen } from 'src/screens/auth/LoginScreen';
 import { FeedStack } from 'src/navigation/FeedStack';
 import { CreateCommentScreen } from 'src/screens/posts/CreateCommentScreen';
 
@@ -23,8 +23,12 @@ export function RootStack() {
 
   return (
     <NavigationContainer theme={navigationTheme}>
-      <Stack.Navigator initialRouteName="FeedList">
-        <Stack.Screen name="LogIn" component={LogInScreen} />
+      <Stack.Navigator initialRouteName="LogIn">
+        <Stack.Screen
+          name="LogIn"
+          component={LoginScreen}
+          options={{ headerShown: false }}
+        />
 
         <Stack.Screen
           name="FeedList"
@@ -64,6 +68,6 @@ export function RootStack() {
   2. PostListScreen
     2.1. PostDetailsScreen
   3. ProfileScreen
-    3.1. LogInScreen
+    3.1. LoginScreen
 
 */

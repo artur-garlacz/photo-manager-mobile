@@ -22,8 +22,6 @@ export function PostListView({ filters }: PostListViewProps) {
   const { data: posts, isLoading } = useGetPostsQuery(filters || {});
   const theme = useTheme();
 
-  console.log('posts', posts?.length);
-
   if (!posts || isLoading) return <ActivityIndicator />;
 
   return (

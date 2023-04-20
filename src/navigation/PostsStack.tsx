@@ -6,6 +6,7 @@ import {
   TransitionPresets,
   createStackNavigator,
 } from '@react-navigation/stack';
+import { CreatePostScreen } from 'src/screens/posts/CreatePostScreen';
 
 const Stack = createStackNavigator<PostsStackNavigator>();
 
@@ -13,14 +14,19 @@ export function PostsStack() {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="PostsList"
-        component={PostsListScreen}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
         name="PostDetails"
         component={PostDetailsScreen}
         options={({ route }) => ({ title: route.params.post.title })}
+      />
+      <Stack.Screen
+        name="CreatePost"
+        options={{
+          animationEnabled: true,
+          animationTypeForReplace: 'pop',
+          headerShown: false,
+          ...TransitionPresets.ModalSlideFromBottomIOS,
+        }}
+        component={CreatePostScreen}
       />
       <Stack.Screen
         name="CreateComment"
