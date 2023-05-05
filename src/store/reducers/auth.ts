@@ -33,7 +33,7 @@ const authSlice = createSlice({
       .addMatcher(
         usersApi.endpoints.loginUser.matchFulfilled,
         (state, action) => {
-          console.log('fulfilled', action);
+          console.log('fulfilled!');
           state.isLoading = false;
           state.user = action.payload;
           state.isAuthenticated = true;
@@ -42,7 +42,7 @@ const authSlice = createSlice({
       .addMatcher(
         usersApi.endpoints.loginUser.matchRejected,
         (state, action) => {
-          console.log('rejected', action);
+          console.log('rejected');
           state.isLoading = false;
           state.isAuthenticated = false;
         }

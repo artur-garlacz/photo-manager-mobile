@@ -34,8 +34,6 @@ export function PostsListScreen({ navigation }: Props) {
   const { data: posts, isLoading } = useGetPostsQuery({});
   const theme = useTheme();
 
-  console.log('XDD', modalVisible);
-
   if (!posts || isLoading) return <ActivityIndicator />;
 
   return (
@@ -54,29 +52,31 @@ export function PostsListScreen({ navigation }: Props) {
         />
       )} */}
 
-      <CreatePostModal
+      <TouchableOpacity
+        style={{
+          position: 'absolute',
+          backgroundColor: theme.colors.primary,
+          borderRadius: 50,
+          width: 50,
+          height: 50,
+          alignItems: 'center',
+          justifyContent: 'center',
+          bottom: 20,
+          right: 20,
+        }}
+        onPress={() => {
+          navigation.navigate('CreatePost');
+        }}
+      >
+        <MaterialCommunityIcons name="feather" size={30} color="#FFFFFF" />
+      </TouchableOpacity>
+
+      {/* <CreatePostModal
         setModalVisible={setModalVisible}
         modalVisible={modalVisible}
       >
-        <TouchableOpacity
-          style={{
-            position: 'absolute',
-            backgroundColor: theme.colors.primary,
-            borderRadius: 50,
-            width: 50,
-            height: 50,
-            alignItems: 'center',
-            justifyContent: 'center',
-            bottom: 85,
-            right: 20,
-          }}
-          onPress={() => {
-            setModalVisible(true);
-          }}
-        >
-          <MaterialCommunityIcons name="feather" size={30} color="#FFFFFF" />
-        </TouchableOpacity>
-      </CreatePostModal>
+        
+      </CreatePostModal> */}
     </View>
   );
 }

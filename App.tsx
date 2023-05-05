@@ -53,7 +53,7 @@ export default function App() {
           theme === 'light'
             ? {
                 ...DefaultTheme,
-                colors: { ...DefaultTheme.colors, primary: Colors.primary },
+                colors: { ...DefaultTheme.colors, primary: Colors.black },
               }
             : {
                 ...DarkTheme,

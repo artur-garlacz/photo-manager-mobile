@@ -20,7 +20,7 @@ export function UserBriefView({
     <View style={styles.container}>
       <Avatar.Image
         size={40}
-        style={{ borderRadius: 6 }}
+        style={{ borderRadius: 6, backgroundColor: 'transparent' }}
         source={require('../../assets/images/avatar1.png')}
       />
       <Text style={styles.name}>{data.name}</Text>

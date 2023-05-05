@@ -34,3 +34,4 @@ export const {
   useLoginUserQuery,
   useUpdateUserMutation,
 } = usersApi;
+export default usersApi;

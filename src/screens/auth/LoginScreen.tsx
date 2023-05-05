@@ -1,21 +1,10 @@
-import { RouteProp } from '@react-navigation/native';
-import { StackNavigationProp } from '@react-navigation/stack';
-import { Controller, useForm } from 'react-hook-form';
-import { View, Text, FlatList, StyleSheet, SafeAreaView } from 'react-native';
+import { Controller } from 'react-hook-form';
+import { View, Text, StyleSheet } from 'react-native';
 import { Button } from 'react-native';
 import { TextInput } from 'react-native';
-import { useQuery } from 'react-query';
-import { commentApi } from 'src/api/actions';
-import { usersApi } from 'src/api/actions/users';
-import { CommentItem } from 'src/components/comments/CommentItem';
-import { PostItemView } from 'src/components/posts/PostItemView';
-import { useAuth } from 'src/hooks/useAuth';
-import { PostsStackNavigator } from 'src/navigation';
 import { useLoginScreen } from 'src/screens/auth/LoginScreen.hook';
-import { authService } from 'src/services/isSignedIn';
-import { Comment, User } from 'src/types';
 import { Colors } from 'src/utils/colors';
-import { Ionicons } from '@expo/vector-icons';
+import { FontAwesome5, Ionicons } from '@expo/vector-icons';
 
 export function LoginScreen() {
   const { control, handleSubmit } = useLoginScreen();
@@ -23,7 +12,7 @@ export function LoginScreen() {
   return (
     <View style={styles.container}>
       <View style={{ alignItems: 'center' }}>
-        <Ionicons name="logo-twitter" size={80} />
+        <FontAwesome5 style={{ marginRight: 10 }} name="hippo" size={80} />
       </View>
       <View>
         <Text style={styles.label}>Email address</Text>

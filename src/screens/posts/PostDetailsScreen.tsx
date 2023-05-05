@@ -12,7 +12,6 @@ import { CommentItem } from 'src/components/comments/CommentItem';
 import { PostItemView } from 'src/components/posts/PostItemView';
 import { PostsStackNavigator } from 'src/navigation';
 import { useGetCommentsQuery } from 'src/store/actions';
-import { useState } from 'react';
 import { useTheme } from 'react-native-paper';
 
 type PostDetailsScreenNavigationProp = StackNavigationProp<
@@ -32,7 +31,6 @@ export function PostDetailsScreen({
   },
   navigation,
 }: Props) {
-  const [modalVisible, setModalVisible] = useState<boolean>(false);
   const theme = useTheme();
 
   const { data: comments, isLoading } = useGetCommentsQuery({

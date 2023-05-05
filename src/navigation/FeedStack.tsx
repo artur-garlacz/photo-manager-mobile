@@ -1,6 +1,10 @@
 import { PostsStackNavigator, StackList } from 'src/navigation';
 import { Appbar, useTheme } from 'react-native-paper';
-import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
+import {
+  Ionicons,
+  MaterialCommunityIcons,
+  FontAwesome5,
+} from '@expo/vector-icons';
 import { BottomTabStack } from 'src/navigation/BottomTabStack';
 import {
   TransitionPresets,
@@ -8,6 +12,8 @@ import {
 } from '@react-navigation/stack';
 import { FeedSettingsScreen } from 'src/screens/feed/FeedSettingsScreen';
 import { FeedSettingsProvider } from 'src/components/feed/context/FeedSettingsContext';
+import { FeedScreen } from 'src/screens/feed/FeedScreen';
+import { AlbumDetailsScreen } from 'src/screens/feed/AlbumDetailsScreen';
 
 const Stack = createStackNavigator<StackList>();
 
@@ -18,34 +24,24 @@ export function FeedStack() {
     <FeedSettingsProvider>
       <Stack.Navigator>
         <Stack.Screen
-          name="FeedList"
+          name="Feed"
+          component={FeedScreen}
           options={{
-            header: ({ options, route, navigation }) => {
-              const title =
-                options.headerTitle !== undefined
-                  ? options.headerTitle
-                  : options.title !== undefined
-                  ? options.title
-                  : route.name;
-
+            header: ({ navigation }) => {
               return (
                 <Appbar.Header
                   theme={{ colors: { primary: theme.colors.surface } }}
                 >
                   <Appbar.Content
                     title={
-                      //   title === 'Feed' ? (
                       (
-                        <MaterialCommunityIcons
+                        <FontAwesome5
                           style={{ marginRight: 10 }}
-                          name="twitter"
+                          name="hippo"
                           size={40}
                           color={theme.colors.primary}
                         />
                       ) as any
-                      //   ) : (
-                      //     <Text>{title.toString()}</Text>
-                      //   )
                     }
                     titleStyle={{
                       fontSize: 18,
@@ -68,11 +64,6 @@ export function FeedStack() {
               );
             },
           }}
-          component={BottomTabStack}
-          // options={({ route }) => {
-          //   const routeName = getFocusedRouteNameFromRoute(route) ?? 'Feed';
-          //   return { headerTitle: routeName };
-          // }}
         />
 
         <Stack.Screen
@@ -84,6 +75,49 @@ export function FeedStack() {
           }}
           name="FeedSettings"
           component={FeedSettingsScreen}
+        />
+
+        <Stack.Screen
+          options={{
+            header: ({ navigation }) => {
+              return (
+                <Appbar.Header
+                  theme={{ colors: { primary: theme.colors.surface } }}
+                >
+                  <Appbar.Content
+                    title={
+                      (
+                        <FontAwesome5
+                          style={{ marginRight: 10 }}
+                          name="hippo"
+                          size={40}
+                          color={theme.colors.primary}
+                        />
+                      ) as any
+                    }
+                    titleStyle={{
+                      fontSize: 18,
+                      fontWeight: 'bold',
+                      color: theme.colors.primary,
+                    }}
+                  />
+                  <Appbar.Action
+                    icon={() => (
+                      <Ionicons
+                        name="ios-settings-outline"
+                        size={24}
+                        color={theme.colors.primary}
+                      />
+                    )}
+                    color={theme.colors.primary}
+                    onPress={() => navigation.navigate('FeedSettings')}
+                  />
+                </Appbar.Header>
+              );
+            },
+          }}
+          name="AlbumDetails"
+          component={AlbumDetailsScreen}
         />
       </Stack.Navigator>
     </FeedSettingsProvider>

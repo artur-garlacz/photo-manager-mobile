@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   TransitionPresets,
   createStackNavigator,
@@ -7,13 +7,15 @@ import {
   NavigationContainer,
   DefaultTheme,
   DarkTheme,
+  useNavigation,
 } from '@react-navigation/native';
 import { useTheme } from 'react-native-paper';
 import { PostDetailsScreen } from 'src/screens/posts/PostDetailsScreen';
 import { StackList } from 'src/navigation';
 import { LoginScreen } from 'src/screens/auth/LoginScreen';
-import { FeedStack } from 'src/navigation/FeedStack';
 import { CreateCommentScreen } from 'src/screens/posts/CreateCommentScreen';
+import { useAppSelector } from 'src/store';
+import { ProtectedStack } from 'src/navigation/ProtectedStack';
 
 const Stack = createStackNavigator<StackList>();
 
@@ -23,7 +25,7 @@ export function RootStack() {
 
   return (
     <NavigationContainer theme={navigationTheme}>
-      <Stack.Navigator initialRouteName="LogIn">
+      <Stack.Navigator initialRouteName="Main">
         <Stack.Screen
           name="LogIn"
           component={LoginScreen}
@@ -31,28 +33,9 @@ export function RootStack() {
         />
 
         <Stack.Screen
-          name="FeedList"
-          component={FeedStack}
+          name="Main"
+          component={ProtectedStack}
           options={{ headerShown: false }}
-        />
-
-        <Stack.Screen
-          name="PostDetails"
-          component={PostDetailsScreen}
-          options={({ route }) => ({
-            title: route.params.post.title,
-            headerBackTitle: 'All',
-          })}
-        />
-        <Stack.Screen
-          name="CreateComment"
-          options={{
-            animationEnabled: true,
-            animationTypeForReplace: 'pop',
-            headerShown: false,
-            ...TransitionPresets.ModalSlideFromBottomIOS,
-          }}
-          component={CreateCommentScreen}
         />
       </Stack.Navigator>
     </NavigationContainer>

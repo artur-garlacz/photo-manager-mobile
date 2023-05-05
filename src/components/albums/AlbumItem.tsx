@@ -1,4 +1,6 @@
-import { View, Text, Dimensions } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { Text, TouchableOpacity } from 'react-native';
+import { AlbumsScreenNavigationProp } from 'src/navigation';
 import { Album } from 'src/types';
 
 type AlbumItemProps = {
@@ -6,10 +8,11 @@ type AlbumItemProps = {
 };
 
 export function AlbumItem({ data }: AlbumItemProps) {
+  const navigation = useNavigation<AlbumsScreenNavigationProp>();
   return (
-    <View
+    <TouchableOpacity
       style={{
-        backgroundColor: '#A1A1A1',
+        backgroundColor: 'black',
         alignItems: 'center',
         justifyContent: 'center',
         flex: 1,
@@ -17,8 +20,9 @@ export function AlbumItem({ data }: AlbumItemProps) {
         padding: 8,
         height: 120,
       }}
+      onPress={() => navigation.navigate('AlbumDetails', { album: data })}
     >
-      <Text>{data.title}</Text>
-    </View>
+      <Text style={{ color: 'white', fontSize: 16 }}>{data.title}</Text>
+    </TouchableOpacity>
   );
 }

@@ -10,13 +10,23 @@ export type PostsStackNavigator = {
   CreateComment: { postId: Post['id'] };
 };
 
+export type AlbumsStackNavigator = {
+  AlbumsList: undefined;
+  AlbumDetails: { album: Album };
+  CreateAlbum: undefined;
+  CreatePhoto: { albumId: Album['id'] };
+};
+
 export type PostsScreenNavigationProp = CompositeNavigationProp<
   BottomTabNavigationProp<PostsStackNavigator, 'PostsList'>,
   StackNavigationProp<PostsStackNavigator>
 >;
 
-export type StackList = PostsStackNavigator & {
-  FeedList: undefined;
-  FeedSettings: undefined;
-  LogIn: undefined;
-};
+export type StackList = PostsStackNavigator &
+  AlbumsStackNavigator & {
+    Protected: undefined;
+    Main: undefined;
+    Feed: undefined;
+    FeedSettings: undefined;
+    LogIn: undefined;
+  };

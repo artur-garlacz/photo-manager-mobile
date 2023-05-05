@@ -1,5 +1,5 @@
 import { Text } from 'react-native';
 
-export function PhotosScreen() {
+export function AlbumDetailsScreen() {
   return <Text>Photos</Text>;
 }
