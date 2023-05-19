@@ -1,18 +1,11 @@
-import { RouteProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { useCallback, useContext, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { StyleSheet, TextInput } from 'react-native';
 import { View, Text, TouchableOpacity } from 'react-native';
-import { Appbar, Avatar, List, useTheme } from 'react-native-paper';
-import { TextInputDropdown } from 'src/components/TextInputDropdown';
-import { useFeedSettings } from 'src/components/feed/hooks/useFeedSettings';
+import { Appbar, Avatar, useTheme } from 'react-native-paper';
 import { PostsStackNavigator } from 'src/navigation';
-import {
-  useCreatePostMutation,
-  useGetAlbumsQuery,
-  useGetPhotosQuery,
-} from 'src/store/actions';
-import { Album, Photo } from 'src/types';
+import { useCreatePostMutation } from 'src/store/actions';
+import { Colors } from 'src/utils/colors';
 
 type CreatePostScreenNavigationProp = StackNavigationProp<
   PostsStackNavigator,
@@ -42,7 +35,7 @@ export function CreatePostScreen({ navigation }: Props) {
 
   return (
     <View>
-      <Appbar.Header>
+      <Appbar.Header style={{ backgroundColor: Colors.white }}>
         <TouchableOpacity style={styles.submitBtn} onPress={navigation.goBack}>
           <Text
             style={{
@@ -64,18 +57,20 @@ export function CreatePostScreen({ navigation }: Props) {
         </TouchableOpacity>
       </Appbar.Header>
 
-      <View>
+      <View
+        style={{ backgroundColor: Colors.white, height: '100%', padding: 16 }}
+      >
         <View
           style={{
             display: 'flex',
             flexDirection: 'row',
             width: '100%',
-            height: 50,
+            backgroundColor: Colors.white,
           }}
         >
           <Avatar.Image
             size={40}
-            style={{ borderRadius: 6 }}
+            style={{ backgroundColor: 'transparent' }}
             source={require('../../assets/images/avatar1.png')}
           />
 

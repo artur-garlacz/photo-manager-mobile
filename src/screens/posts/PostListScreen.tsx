@@ -22,13 +22,6 @@ type Props = {
   navigation: StackNavigationProp<StackList, 'PostsList'>;
 };
 export function PostsListScreen({ navigation }: Props) {
-  //   const [isOpenCreateModal, setOpenCreateModal] = useState(false);
-  //   const { isAuthenticated, user } = useAppSelector((state) => state.auth);
-
-  //   const handleToggle = useCallback(() => {
-  //     setOpenCreateModal((state) => !state);
-  //   }, []);
-
   const [selectedPost, setPost] = useState<Post>();
   const [modalVisible, setModalVisible] = useState<boolean>(false);
   const { data: posts, isLoading } = useGetPostsQuery({});

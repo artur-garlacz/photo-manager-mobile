@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import {
   DefaultTheme,
@@ -24,12 +24,12 @@ export function ProtectedStack() {
   const { isAuthenticated } = useAppSelector((state) => state.auth);
   const navigation = useNavigation<any>();
 
-  // useEffect(() => {
-  //   console.log('isAuthenticated', isAuthenticated);
-  //   if (!isAuthenticated) {
-  //     navigation.navigate('LogIn');
-  //   }
-  // }, [isAuthenticated]);
+  useEffect(() => {
+    console.log('isAuthenticated', isAuthenticated);
+    if (!isAuthenticated) {
+      navigation.navigate('LogIn');
+    }
+  }, [isAuthenticated]);
 
   return (
     <Tab.Navigator

@@ -22,6 +22,11 @@ export type PostsScreenNavigationProp = CompositeNavigationProp<
   StackNavigationProp<PostsStackNavigator>
 >;
 
+export type AlbumsScreenNavigationProp = CompositeNavigationProp<
+  BottomTabNavigationProp<AlbumsStackNavigator, 'AlbumsList'>,
+  StackNavigationProp<AlbumsStackNavigator>
+>;
+
 export type StackList = PostsStackNavigator &
   AlbumsStackNavigator & {
     Protected: undefined;

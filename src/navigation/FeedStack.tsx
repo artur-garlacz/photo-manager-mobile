@@ -84,6 +84,17 @@ export function FeedStack() {
                 <Appbar.Header
                   theme={{ colors: { primary: theme.colors.surface } }}
                 >
+                  <Appbar.Action
+                    icon={() => (
+                      <Ionicons
+                        name="arrow-back"
+                        size={24}
+                        color={theme.colors.primary}
+                      />
+                    )}
+                    color={theme.colors.primary}
+                    onPress={() => navigation.goBack()}
+                  />
                   <Appbar.Content
                     title={
                       (

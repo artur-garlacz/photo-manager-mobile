@@ -1,18 +1,13 @@
 import { RouteProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { useCallback, useContext, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { StyleSheet, TextInput } from 'react-native';
 import { View, Text, TouchableOpacity } from 'react-native';
-import { Appbar, Avatar, List, useTheme } from 'react-native-paper';
-import { TextInputDropdown } from 'src/components/TextInputDropdown';
-import { useFeedSettings } from 'src/components/feed/hooks/useFeedSettings';
+import { Appbar, Avatar, useTheme } from 'react-native-paper';
 import { PostsStackNavigator } from 'src/navigation';
-import {
-  useCreateCommentMutation,
-  useGetAlbumsQuery,
-  useGetPhotosQuery,
-} from 'src/store/actions';
-import { Album, Photo } from 'src/types';
+import { useAppSelector } from 'src/store';
+import { useCreateCommentMutation } from 'src/store/actions';
+import { Colors } from 'src/utils/colors';
 
 type CreateCommentScreenNavigationProp = StackNavigationProp<
   PostsStackNavigator,
@@ -35,14 +30,14 @@ export function CreateCommentScreen({
   },
   navigation,
 }: Props) {
-  const [form, setForm] = useState({ title: '', body: '' });
+  const [form, setForm] = useState({ name: '', body: '' });
   const [createComment] = useCreateCommentMutation();
+  const user = useAppSelector((state) => state.auth.user);
 
   const handleCreateComment = useCallback(async () => {
-    await createComment({ ...form, postId });
+    await createComment({ ...form, email: user?.email, postId });
     navigation.goBack();
   }, [form, createComment]);
-  const theme = useTheme();
 
   const handleChange = useCallback(
     (name: string) => (text: string) => {
@@ -53,7 +48,7 @@ export function CreateCommentScreen({
 
   return (
     <View>
-      <Appbar.Header>
+      <Appbar.Header style={{ backgroundColor: Colors.white }}>
         <TouchableOpacity style={styles.submitBtn} onPress={navigation.goBack}>
           <Text
             style={{
@@ -70,12 +65,17 @@ export function CreateCommentScreen({
           title="Add comment"
         />
 
-        <TouchableOpacity style={styles.submitBtn}>
+        <TouchableOpacity
+          style={styles.submitBtn}
+          onPress={handleCreateComment}
+        >
           <Text style={{ fontWeight: '600', fontSize: 16 }}>Done</Text>
         </TouchableOpacity>
       </Appbar.Header>
 
-      <View>
+      <View
+        style={{ backgroundColor: Colors.white, height: '100%', padding: 16 }}
+      >
         <View
           style={{
             display: 'flex',
@@ -92,9 +92,9 @@ export function CreateCommentScreen({
 
           <TextInput
             style={{ ...styles.input, fontWeight: '500', fontSize: 20 }}
-            placeholder="Enter title here..."
-            value={form.title}
-            onChangeText={handleChange('title')}
+            placeholder="Enter comment name here..."
+            value={form.name}
+            onChangeText={handleChange('name')}
           />
         </View>
 
