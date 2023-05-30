@@ -1,6 +1,5 @@
 import { useCallback, useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { View, Text, StyleSheet, Button, TextInput } from 'react-native';
+import { View, StyleSheet, TextInput } from 'react-native';
 import { Avatar } from 'react-native-paper';
 import { Modal, ModalProps } from 'src/components/modal/Modal';
 import { useCreatePostMutation } from 'src/store/actions';
@@ -16,7 +15,6 @@ export function CreatePostModal({
   const [createPost] = useCreatePostMutation();
 
   const handleCreatePost = useCallback(async () => {
-    console.log(form);
     await createPost({ ...form, userId: 1 });
     setModalVisible(false);
   }, [form, createPost, setModalVisible]);

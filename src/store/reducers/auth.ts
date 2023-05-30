@@ -27,7 +27,7 @@ const authSlice = createSlice({
         usersApi.endpoints.loginUser.matchPending,
         (state, action) => {
           state.isLoading = true;
-          console.log('pending', action.payload, state.isLoading);
+          console.log('pending');
         }
       )
       .addMatcher(

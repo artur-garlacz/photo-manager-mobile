@@ -1,11 +1,5 @@
 import { useState } from 'react';
-import {
-  ActivityIndicator,
-  FlatList,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-} from 'react-native';
+import { FlatList, StyleSheet } from 'react-native';
 import { LoadingIndicator } from 'src/components/LoadingIndicator';
 import { useFeedSettings } from 'src/components/feed/hooks/useFeedSettings';
 import { PhotoItem } from 'src/components/photos/PhotoItem';
@@ -13,16 +7,21 @@ import { useGetPhotosQuery } from 'src/store/actions';
 
 type PhotoListProps = {
   ListHeaderComponent?: FlatList['props']['ListHeaderComponent'];
+  albumId?: number;
 };
 
-export function PhotoList({ ListHeaderComponent }: PhotoListProps) {
+export function PhotoList({ ListHeaderComponent, albumId }: PhotoListProps) {
   const {
     state: { filterBy },
   } = useFeedSettings();
-  const { data: photos, isLoading } = useGetPhotosQuery({
-    albumId: filterBy.albumId,
-    id: filterBy.photoId,
-  });
+  const { data: photos, isLoading } = useGetPhotosQuery(
+    albumId
+      ? { albumId }
+      : {
+          albumId: filterBy.albumId,
+          id: filterBy.photoId,
+        }
+  );
 
   if (!photos || isLoading) return <LoadingIndicator />;
 

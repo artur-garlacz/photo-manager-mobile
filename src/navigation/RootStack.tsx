@@ -41,16 +41,3 @@ export function RootStack() {
     </NavigationContainer>
   );
 }
-
-/*
-
-  1. FeedScreen
-    1.1. PhotoListScreen
-    1.2. AlbumListScreen
-      1.2.1. AlbumDetailsScreen
-  2. PostListScreen
-    2.1. PostDetailsScreen
-  3. ProfileScreen
-    3.1. LoginScreen
-
-*/

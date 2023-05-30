@@ -1,16 +1,13 @@
-import { useCallback, useState } from 'react';
 import { ActivityIndicator, FlatList, StyleSheet, Text } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { GetPostsArgs, postsApi } from 'src/api/actions';
-import { Album, Post } from 'src/types';
-import { albumsApi } from 'src/api/actions/albums';
 import { AlbumItem } from 'src/components/albums/AlbumItem';
 import { useGetAlbumsQuery } from 'src/store/actions';
 
-type AlbumListProps = {};
+type AlbumListProps = {
+  userId?: number;
+};
 
-export function AlbumList({}: AlbumListProps) {
-  const { data: albums, isLoading } = useGetAlbumsQuery({});
+export function AlbumList({ userId }: AlbumListProps) {
+  const { data: albums, isLoading } = useGetAlbumsQuery({ userId });
 
   if (!albums || isLoading) return <ActivityIndicator />;
 
@@ -29,6 +26,7 @@ export function AlbumList({}: AlbumListProps) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    padding: 10,
     flexDirection: 'column',
   },
   list: {

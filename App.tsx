@@ -1,6 +1,6 @@
 import * as Font from 'expo-font';
 import { Provider as PaperProvider, DefaultTheme } from 'react-native-paper';
-import { LogBox, useColorScheme } from 'react-native';
+import { LogBox } from 'react-native';
 import { RootStack } from 'src/navigation/RootStack';
 import { useEffect } from 'react';
 import { Provider } from 'react-redux';

@@ -1,10 +1,10 @@
 import { StackNavigationProp } from '@react-navigation/stack';
-import { View, Text, FlatList, StyleSheet, SafeAreaView } from 'react-native';
+import { View, Text, StyleSheet, SafeAreaView, ScrollView } from 'react-native';
 import { Avatar } from 'react-native-paper';
+import { AlbumList } from 'src/components/albums/AlbumList';
+import { PostListView } from 'src/components/posts';
 import { PostsStackNavigator } from 'src/navigation';
-import { authService } from 'src/services/isSignedIn';
 import { useAppSelector } from 'src/store';
-import { Comment, User } from 'src/types';
 import { Colors } from 'src/utils/colors';
 
 type ProfileScreenNavigationProp = StackNavigationProp<
@@ -19,7 +19,7 @@ export function ProfileScreen({}: Props) {
   const { user } = useAppSelector((state) => state.auth);
 
   return (
-    <SafeAreaView style={styles.container}>
+    <ScrollView style={styles.container}>
       <View style={{ alignItems: 'center', paddingTop: 50 }}>
         <Avatar.Image
           size={120}
@@ -143,7 +143,15 @@ export function ProfileScreen({}: Props) {
           <Text>{user?.company.bs}</Text>
         </View>
       </View>
-    </SafeAreaView>
+      <View style={{ paddingHorizontal: 14, paddingVertical: 10 }}>
+        <Text style={styles.label}>User Posts</Text>
+      </View>
+      <PostListView filters={{ userId: user?.id }} />
+      <View style={{ paddingHorizontal: 14, paddingTop: 10 }}>
+        <Text style={styles.label}>User albums</Text>
+      </View>
+      <AlbumList userId={user?.id} />
+    </ScrollView>
   );
 }
 

@@ -17,7 +17,6 @@ type AlbumDetailsScreenProps = {
 };
 
 export function AlbumDetailsScreen({
-  navigation,
   route: {
     params: { album },
   },
@@ -39,6 +38,7 @@ export function AlbumDetailsScreen({
             </Text>
           </View>
         }
+        albumId={album.id}
       />
     </>
   );

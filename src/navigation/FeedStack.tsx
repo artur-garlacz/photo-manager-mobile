@@ -1,11 +1,6 @@
-import { PostsStackNavigator, StackList } from 'src/navigation';
+import { StackList } from 'src/navigation';
 import { Appbar, useTheme } from 'react-native-paper';
-import {
-  Ionicons,
-  MaterialCommunityIcons,
-  FontAwesome5,
-} from '@expo/vector-icons';
-import { BottomTabStack } from 'src/navigation/BottomTabStack';
+import { Ionicons, FontAwesome5 } from '@expo/vector-icons';
 import {
   TransitionPresets,
   createStackNavigator,
@@ -27,7 +22,7 @@ export function FeedStack() {
           name="Feed"
           component={FeedScreen}
           options={{
-            header: ({ navigation }) => {
+            header: ({ navigation, route }) => {
               return (
                 <Appbar.Header
                   theme={{ colors: { primary: theme.colors.surface } }}
@@ -111,17 +106,6 @@ export function FeedStack() {
                       fontWeight: 'bold',
                       color: theme.colors.primary,
                     }}
-                  />
-                  <Appbar.Action
-                    icon={() => (
-                      <Ionicons
-                        name="ios-settings-outline"
-                        size={24}
-                        color={theme.colors.primary}
-                      />
-                    )}
-                    color={theme.colors.primary}
-                    onPress={() => navigation.navigate('FeedSettings')}
                   />
                 </Appbar.Header>
               );

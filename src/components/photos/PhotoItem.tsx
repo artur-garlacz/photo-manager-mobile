@@ -37,13 +37,10 @@ export function PhotoItem({ data }: PhotoItemProps) {
             borderRadius: 50,
             padding: 10,
             overflow: 'hidden',
+            maxWidth: '90%',
           }}
         >
-          <MaterialCommunityIcons
-            name="heart-outline"
-            size={20}
-            color={theme.colors.primary}
-          />
+          <Text>{data.title}</Text>
         </View>
       </>
     </TouchableHighlight>

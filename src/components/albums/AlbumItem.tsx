@@ -19,6 +19,7 @@ export function AlbumItem({ data }: AlbumItemProps) {
         margin: 2,
         padding: 8,
         height: 120,
+        borderRadius: 10,
       }}
       onPress={() => navigation.navigate('AlbumDetails', { album: data })}
     >

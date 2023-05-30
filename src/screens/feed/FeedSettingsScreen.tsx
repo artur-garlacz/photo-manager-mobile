@@ -1,4 +1,5 @@
-import { useCallback, useContext, useState } from 'react';
+import { useNavigation } from '@react-navigation/native';
+import { useCallback, useState } from 'react';
 import { StyleSheet } from 'react-native';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { Appbar, List, useTheme } from 'react-native-paper';
@@ -8,17 +9,19 @@ import { useGetAlbumsQuery, useGetPhotosQuery } from 'src/store/actions';
 import { Album, Photo } from 'src/types';
 
 export function FeedSettingsScreen() {
-  const { state, dispatch } = useFeedSettings();
+  const { dispatch } = useFeedSettings();
   const [filterBy, setFilterBy] = useState<{
     albumId?: number;
     photoId?: number;
   }>({});
   const { data: albums } = useGetAlbumsQuery({});
   const { data: photos } = useGetPhotosQuery({});
+  const navigation = useNavigation();
   const theme = useTheme();
 
   const handleSubmit = useCallback(() => {
     dispatch({ type: 'APPLY_FILTER', payload: { ...filterBy } });
+    navigation.goBack();
   }, [filterBy]);
 
   const handleClear = useCallback(() => {
@@ -27,14 +30,11 @@ export function FeedSettingsScreen() {
 
   const handleSelectFilter = useCallback((item: Album | Photo) => {
     if ('albumId' in item) {
-      setFilterBy({ ...filterBy, albumId: item.id });
-    } else {
       setFilterBy({ ...filterBy, photoId: item.id });
+    } else {
+      setFilterBy({ ...filterBy, albumId: item.id });
     }
   }, []);
-
-  console.log('state', state);
-  console.log('filterBy', filterBy);
 
   return (
     <View>

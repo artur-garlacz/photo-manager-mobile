@@ -14,7 +14,13 @@ const Stack = createStackNavigator<PostsStackNavigator>();
 export function PostsStack() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="PostsList" component={PostsListScreen} />
+      <Stack.Screen
+        name="PostsList"
+        options={{
+          headerTitle: 'Posts',
+        }}
+        component={PostsListScreen}
+      />
       <Stack.Screen
         name="PostDetails"
         component={PostDetailsScreen}
