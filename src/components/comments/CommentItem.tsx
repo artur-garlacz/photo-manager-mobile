@@ -60,13 +60,21 @@ function Wrapper({
 }) {
   if (onLongPress) {
     return (
-      <TouchableOpacity style={styles.container} onLongPress={onLongPress}>
+      <TouchableOpacity
+        testID="comment-item"
+        style={styles.container}
+        onLongPress={onLongPress}
+      >
         {children}
       </TouchableOpacity>
     );
   }
 
-  return <View style={styles.container}>{children}</View>;
+  return (
+    <View testID="comment-item" style={styles.container}>
+      {children}
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
